@@ -1,0 +1,16 @@
+* {
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+}
+
+div#output {
+    margin: 2em auto;
+    width: 100px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    div.box {
+        border: 1px solid black;
+        text-align: center;
+    }
+}

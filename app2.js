@@ -1,9 +1,11 @@
 let layout = 
 [
     1, 0, 0,
-    2, 2, 0,
-    1, 0, 0
+    2, 0, 2,
+    0, 0, 1
 ]
+
+let squares = document.querySelectorAll(".box")
 
 class GPS {
     constructor(rowSize, layout) {
@@ -14,13 +16,23 @@ class GPS {
         this.isSearching = true
         this.moves = 0
     }
+
+    show() {
+        let output = document.getElementById('output')
+        output.innerHTML = ""
+        for(let i = 0; i < this.layout.length; i++) {
+            output.innerHTML += `<div key="${i}" class="box">${this.layout[i]}</div>`
+        }
+        squares = document.querySelectorAll(".box")
+        squares[0].style.color = "red"
+    }
     
     // SEARCH
     search() {
-        while(this.isSearching && this.moves <= 20) {
+        while(this.isSearching && this.moves <= 10) {
             this.move()
         }
-        if(this.moves >= 20) {
+        if(this.moves >= 10) {
             return "Not Found"
         } else {
             return `Found it in ${this.moves} moves.`
@@ -33,25 +45,21 @@ class GPS {
             this.checkNearby()
             this.up()
             this.checkNearby()
-            let interval = window.setInterval(console.log("waiting"), 3000)
         }
         if(this.isSearching) {
             this.checkNearby()
             this.right()
             this.checkNearby()
-            let interval = window.setInterval(console.log("waiting"), 3000)            
         }
         if(this.isSearching) {
             this.checkNearby()
             this.down()
             this.checkNearby()
-            let interval = window.setInterval(console.log("waiting"), 3000)
         }
         if(this.isSearching) {
             this.checkNearby()
             this.left()
             this.checkNearby()
-            let interval = window.setInterval(console.log("waiting"), 3000)
         }
     
     
@@ -63,15 +71,19 @@ checkNearby() {
 
     if(this.layout[this.current + 1] === 1 && this.current + 1 !== 0 && this.isSearching) {
         console.log("from the new")
+        squares[this.current].style.color = "red"
         this.right()
     } else if(this.layout[this.current - 1] === 1 && this.current - 1 !== 0 && this.isSearching) {
         console.log("from the new")
+        squares[this.current].style.color = "red"
         this.left()
     } else if(this.layout[this.current - this.rowSize] === 1 && this.current - this.rowSize !== 0 && this.isSearching)  {
         console.log("from the new")
+        squares[this.current].style.color = "red"
         this.up()
     } else if(this.layout[this.current + this.rowSize] === 1 && this.current + this.rowSize !== 0 && this.isSearching) {
         console.log("from the new")
+        squares[this.current].style.color = "red"
         this.down()
     }          
     
@@ -87,6 +99,7 @@ checkNearby() {
                 this.previous = this.current
                 this.current = this.current - this.rowSize
                 this.moves++
+                squares[this.current].style.color = "red"
             } else if(this.layout[this.current - this.rowSize] !== this.layout[0]) {
                 console.log("wrong way")
                 return "wrong"
@@ -100,6 +113,7 @@ checkNearby() {
                     this.previous = this.current
                     this.current = this.current - this.rowSize
                     this.isSearching = false
+                    squares[this.current].style.color = "red"
                     return "found"
 
                 }
@@ -117,6 +131,7 @@ checkNearby() {
                 this.previous = this.current
                 this.current = this.current + 1
                 this.moves++
+                squares[this.current].style.color = "red"
             } else if(this.layout[this.current + 1] !== this.layout[0]) {
                 console.log("wrong way")
                 return "wrong"
@@ -130,6 +145,7 @@ checkNearby() {
                     this.previous = this.current
                     this.current = this.current + 1
                     this.isSearching = false
+                    squares[this.current].style.color = "red"
                     return "found"
                 }
             }
@@ -145,6 +161,7 @@ checkNearby() {
                 this.moves++              
                 this.previous = this.current
                 this.current = this.current + this.rowSize
+                squares[this.current].style.color = "red"
                 console.log("not found")
             } else if(this.layout[this.current + this.rowSize] !== this.layout[0]) {
                 console.log(this.current)
@@ -161,6 +178,7 @@ checkNearby() {
                     console.log(this.current)
                     console.log("found")
                     this.isSearching = false
+                    squares[this.current].style.color = "red"
                     return "found"
                 }
             }   
@@ -177,6 +195,7 @@ checkNearby() {
                 this.moves++
                 this.previous = this.current
                 this.current = this.current - 1
+                squares[this.current].style.color = "red"
             } else if(this.layout[this.current - 1] !== this.layout[0]) {
                 console.log("wrong way")
                 return "wrong"
@@ -190,6 +209,7 @@ checkNearby() {
                     this.previous = this.current
                     this.current = this.current -1
                     this.isSearching = false
+                    squares[this.current].style.color = "red"
                     return "found"
                 }
             }
