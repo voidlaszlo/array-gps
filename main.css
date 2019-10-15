@@ -5,8 +5,27 @@
           box-sizing: border-box;
 }
 
+body {
+  text-align: center;
+}
+
+nav {
+  padding: 1em;
+  background-color: #eee;
+  text-align: center;
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+  width: 100px;
+  background-color: black;
+  color: white;
+}
+
 div#output {
   margin: 2em auto;
+  margin-bottom: 0;
   width: 100px;
   display: -ms-grid;
   display: grid;
@@ -17,5 +36,10 @@ div#output {
 div#output div.box {
   border: 1px solid black;
   text-align: center;
+}
+
+p {
+  margin-top: 1em;
+  padding: 0 1em;
 }
 /*# sourceMappingURL=main.css.map */

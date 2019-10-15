@@ -2,7 +2,7 @@ let layout =
 [
     1, 0, 0,
     2, 0, 2,
-    0, 0, 1
+    1, 0, 0
 ]
 
 let squares = document.querySelectorAll(".box")
@@ -218,3 +218,7 @@ checkNearby() {
 }
 
 const gps = new GPS(3, layout, 0)
+gps.show()
+document.querySelector('button').addEventListener('click', (e) => {
+    gps.search()
+})
